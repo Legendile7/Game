@@ -3,43 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | FinancialAnalysisGame</title>
+    <title>Unity Web Player | Star Tank</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="manifest" href="manifest.webmanifest">
-    <script>
-      function openFileExplorer() {
-      let input = document.createElement("input");
-      input.type = "file";
-      input.accept = "image/*"; // Restrict to images
-      input.onchange = function (e) {
-          let file = e.target.files[0];
-          if (file) {
-              let reader = new FileReader();
-              reader.onload = function (event) {
-                  let arrayBuffer = event.target.result;
-
-                  // Convert ArrayBuffer to Base64
-                  let binary = '';
-                  let bytes = new Uint8Array(arrayBuffer);
-                  for (let i = 0; i < bytes.length; i++) {
-                      binary += String.fromCharCode(bytes[i]);
-                  }
-                  let base64String = btoa(binary); // Encode to Base64
-
-                  if (window.unityInstance) {
-                      window.unityInstance.SendMessage('PinataUploader', 'OnFileUploaded', base64String);
-                  } else {
-                      console.error("Unity instance not found!");
-                  }
-              };
-              reader.readAsArrayBuffer(file); // Read file as ArrayBuffer
-          }
-      };
-      input.click();
-    }
-
-    </script>
   </head>
   <body>
     <div id="unity-container">
@@ -93,12 +60,12 @@
       var loaderUrl = buildUrl + "/FinanceGame.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/FinanceGame.data",
-        frameworkUrl: buildUrl + "/FinanceGame.framework.js",
-        codeUrl: buildUrl + "/FinanceGame.wasm",
+        dataUrl: buildUrl + "/FinanceGame.data.gz",
+        frameworkUrl: buildUrl + "/FinanceGame.framework.js.gz",
+        codeUrl: buildUrl + "/FinanceGame.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "FinancialAnalysisGame",
+        companyName: "Overshock Games",
+        productName: "Star Tank",
         productVersion: "1.0",
         showBanner: unityShowBanner,
       };
@@ -126,7 +93,6 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-          window.unityInstance = unityInstance
           loadingBar.style.display = "none";
         }).catch((message) => {
           alert(message);

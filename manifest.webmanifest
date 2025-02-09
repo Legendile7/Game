@@ -1,6 +1,6 @@
 {
-    "name": "FinancialAnalysisGame",
-    "short_name": "FinancialAnalysisGame",
+    "name": "Star Tank",
+    "short_name": "Star Tank",
     "start_url": "index.html",
     "display": "fullscreen",
     "background_color": "#231F20",
